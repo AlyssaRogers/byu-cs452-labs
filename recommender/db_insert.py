@@ -15,10 +15,12 @@ for root, dirs, files in os.walk(directory):
     for file_name in files:
         embeddings = pd.concat([embeddings, pd.read_json(f"{directory}/{file_name}", lines=True)])
 
-#print("Dataframs: ", embeddings)
-final_embeddings = embeddings['custom_id']
-embeddings_columns = pd.json_normalize(embeddings['response'])['body.data']
-final_embeddings[embeddings] = pd.json_normalize(pd.json_normalize(embeddings['response'], max_level=0)['body'], max_level=0)
+print(embeddings['response'].apply(lambda x: x['response']['embeddings']))
+#print("Dataframes: ", embeddings)
+#final_embeddings = embeddings['custom_id']
+#embeddings_columns = pd.json_normalize(embeddings['response'])['body.data']
+#print(embeddings_columns)
+#final_embeddings[embeddings] = pd.json_normalize(pd.json_normalize(embeddings['response'], max_level=0)['body'], max_level=0)
 
 
 '''directory = "../documents"

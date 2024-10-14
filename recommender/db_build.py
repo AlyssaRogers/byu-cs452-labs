@@ -21,7 +21,7 @@ def select_all_from_podcast(conn):
 
 #load_dotenv()
 
-CONNECTION = "postgres://tsdbadmin:kwmtav03ndd501ym@mqeecwb2xv.l2ecxhvt0m.tsdb.cloud.timescale.com:39779/tsdb?sslmode=require"
+CONNECTION = 'a';
 
 
 # need to run this to enable vector data type
