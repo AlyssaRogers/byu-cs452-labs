@@ -21,7 +21,7 @@ def select_all_from_podcast(conn):
 
 #load_dotenv()
 
-CONNECTION = 'a';
+CONNECTION = 'postgres://tsdbadmin:kwmtav03ndd501ym@mqeecwb2xv.l2ecxhvt0m.tsdb.cloud.timescale.com:39779/tsdb?sslmode=require';
 
 
 # need to run this to enable vector data type
@@ -32,20 +32,20 @@ CREATE_PODCAST_TABLE = """
     DROP TABLE IF EXISTS podcast_segment;
     DROP TABLE IF EXISTS podcast;
     CREATE TABLE podcast (
-        PK_id INT PRIMARY KEY,
+        id TEXT PRIMARY KEY,
         title TEXT
     );
 """
 # TODO: Add create table statement
 CREATE_SEGMENT_TABLE = """
     CREATE TABLE podcast_segment (
-        PK_id INT PRIMARY KEY,
-        start_time TIMESTAMP,
-        end_time TIMESTAMP,
+        id TEXT PRIMARY KEY,
+        start_time DECIMAL(10, 2),
+        end_time DECIMAL(10, 2),
         content TEXT,
         embedding TEXT,
-        podcast_id INT,
-        FOREIGN KEY (podcast_id) references podcast(PK_id) 
+        podcast_id TEXT,
+        FOREIGN KEY (podcast_id) references podcast(id) 
     );
 """
 
@@ -56,6 +56,7 @@ cursor = conn.cursor()
 
 cursor.execute(CREATE_PODCAST_TABLE) 
 cursor.execute(CREATE_SEGMENT_TABLE)
-  
+
+
 conn.commit() 
 conn.close() 
